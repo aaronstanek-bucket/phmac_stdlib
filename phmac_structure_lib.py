@@ -51,46 +51,34 @@ def table(inp):
 my_custom.add("table",table)
 
 def hmenu(inp):
+    w = "width="+str(int(float(100)/float(len(inp.subs))))+"%"
     ou = node()
-    ou.ty = "t"
-    ou.text = ""
-    tab = node()
-    ou.subs.append(tab)
-    tab.ty = "u"
-    tab.tag = "table"
-    tab.args = inp.args
-    tab.subs.append(node())
-    tab.subs[0].ty = "t"
-    tab.subs[0].text = "centered"
-    tab.subs.append(node())
-    tab.subs[1].ty = "t"
-    tab.subs[1].text = "args"
-    w = str(int(float(100)/float(len(inp.subs))))+"%"
-    rep = node()
-    rep.ty = "t"
-    rep.text = "width=\""+w+"\""
+    ou.ty = "b"
+    ou.tag = "table"
+    ou.args = inp.args
+    tr = node()
+    tr.ty = "b"
+    tr.tag = "tr"
+    ou.subs.append(tr)
     for i in range(len(inp.subs)):
-        j_node = node()
-        j_node.ty = "t"
-        j_node.text = str(i)
-        j_node.subs.append(rep)
-        tab.subs[1].subs.append(j_node)
-        del(j_node)
-    del(rep)
-    del(w)
-    tab.subs.append(node())
-    tab.subs[2].ty = "t"
-    tab.subs[2].text = "row0"
-    for i in range(len(inp.subs)):
+        td = node()
+        td.ty = "b"
+        td.tag = "td"
+        td.args = w
+        tr.subs.append(td)
+        # p_node = node()
+        # p_node.ty = "b"
+        # p_node.tag = "p"
+        # td.subs.append(p_node)
         a_node = node()
-        a_node.ty = "u"
+        a_node.ty = "b"
         a_node.tag = "a"
-        a_node.subs.append(inp.subs[i])
-        a_node.subs.append(inp.subs[i].subs[0])
-        a_node.subs[0].subs = []
-        a_node.subs[1].subs = []
-        tab.subs[2].subs.append(a_node)
-        del(a_node)
+        a_node.args = "href=\""+inp.subs[i].subs[0].text+"\""
+        td.subs.append(a_node)
+        words = node()
+        words.ty = "t"
+        words.text = inp.subs[i].text
+        a_node.subs.append(words)
     return ou
 
 my_custom.add("hmenu",hmenu)
