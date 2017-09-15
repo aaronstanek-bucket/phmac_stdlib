@@ -41,8 +41,8 @@ def macro(inp):
     ou = node()
     ou.ty = "t"
     ou.text = ""
-    my_macros[inp.subs[0].tag] = copy.deepcopy(inp.subs[1])
-    my_custom.add(inp.subs[0].tag,macro_handler)
+    my_macros[inp.subs[0].text] = copy.deepcopy(inp.subs[1])
+    my_custom.add(inp.subs[0].text,macro_handler)
     return ou
 
 my_custom.add("macro",macro)
