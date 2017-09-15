@@ -67,12 +67,12 @@ def Import(inp):
         elif x.text[-6:]==".phmac":
             m = file_to_tree(inp.subs[0].text)
             ou.subs = m.subs
-        elif x.text[-5:]==".html":
+        elif (x.text[-5:]==".html") or (x.text[-8:]==".c_phmac"):
             infile = open(x.text,"r")
             ou.text = infile.read()
             infile.close()
         else:
-            raise Exception("Import file, extension not recognized (.js .css .phmac .html  only): "+x.text)
+            raise Exception("Import file, extension not recognized (.js .css .phmac .c_phmac .html  only): "+x.text)
     return ou
 
 my_custom.add("import",Import)
